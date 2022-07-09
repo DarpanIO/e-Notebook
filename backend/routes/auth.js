@@ -21,7 +21,6 @@ router.post(
     if (!errors.isEmpty()) {
       res.status(400).json({ errors: errors.array() });
     }
-
     //Check whwther user with this Email exists already
     try {
       let user = await User.findOne({ email: req.body.email });
