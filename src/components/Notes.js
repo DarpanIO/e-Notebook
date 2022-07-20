@@ -5,19 +5,22 @@ import { Noteitem } from "./Noteitem";
 
 export const Notes = () => {
     const context = useContext(noteContext);
-    const { notes, getNotes } = context;
-    const [note, setNote] = useState({etitle: "", edescription: "",etag: ""})
+    const { notes, getNotes,editNote } = context;
+    
+    const [note, setNote] = useState({id:"" ,etitle: "", edescription: "",etag: ""})
     useEffect(() => {
       getNotes()
     }, [])
     const updateNote = (currentNote)=>{
       ref.current.click()
-      setNote({etitle:currentNote.title ,edescription:currentNote.description ,etag:currentNote.tag});
+      setNote({id:currentNote._id ,etitle:currentNote.title ,edescription:currentNote.description ,etag:currentNote.tag});
     }
     const ref = useRef(null);
+    const refClose = useRef(null);
     const handleClick=(e)=>{
       console.log("Updating the note...." ,note);
-      e.preventDefault();  
+      editNote(note.id,note.etitle,note.edescription,note.etag)
+      refClose.current.click();  
   }
   const onChange = (e)=>{
       setNote({...note,[e.target.name]:e.target.value})
@@ -84,7 +87,7 @@ export const Notes = () => {
     </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" ref={refClose}>Close</button>
         <button type="button" class="btn btn-primary" onClick={handleClick}>Update Note</button>
       </div>
     </div>
