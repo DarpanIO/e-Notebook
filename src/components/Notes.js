@@ -69,6 +69,8 @@ export const Notes = () => {
           name="edescription"
           value={note.edescription}
           onChange={onChange}
+          minLength={5}
+          required
         />
       </div>
       <div className="mb-3">
@@ -82,19 +84,24 @@ export const Notes = () => {
           name="etag"
           value={note.etag}
           onChange={onChange}
+          minLength={5}
+          required
         />
       </div>
     </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" ref={refClose}>Close</button>
-        <button type="button" class="btn btn-primary" onClick={handleClick}>Update Note</button>
+        <button disabled={note.etitle.length<5 || note.edescription.length<5} type="button" class="btn btn-primary" onClick={handleClick}>Update Note</button>
       </div>
     </div>
   </div>
-</div>
+</div> 
     <div className="row">
     <h2>Your notes</h2>
+    <div className="container">
+      {notes.length === 0 && "No Notes to display" }
+    </div>
     {notes.map((note) => {
       return <Noteitem key={note._id} updateNote={updateNote} note={note}/> ;
     })}

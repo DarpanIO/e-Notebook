@@ -8,6 +8,7 @@ export const AddNote = () => {
     const handleClick=(e)=>{
         e.preventDefault();
         addNote(note.title,note.description,note.tag);  
+        setNote({title: "", description: "",tag: ""});
     }
     const onChange = (e)=>{
         setNote({...note,[e.target.name]:e.target.value})
@@ -27,6 +28,9 @@ export const AddNote = () => {
           name="title"
           aria-describedby="emailHelp"
           onChange={onChange}
+          minLength={5}
+          required
+          value={note.title}
         />
       </div>
       <div className="mb-3">
@@ -39,6 +43,9 @@ export const AddNote = () => {
           id='description'
           name="description"
           onChange={onChange}
+          minLength={5}
+          required
+          value={note.description}
         />
       </div>
       <div className="mb-3">
@@ -51,10 +58,13 @@ export const AddNote = () => {
           id='tag'
           name="tag"
           onChange={onChange}
+          minLength={5}
+          required
+          value={note.tag}
         />
       </div>
 
-      <button type="submit" onClick={handleClick} className="btn btn-primary">
+      <button disabled={note.title.length<5 || note.description.length<5} type="submit" onClick={handleClick} className="btn btn-primary">
         Submit
       </button>
     </form>

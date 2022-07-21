@@ -38,15 +38,7 @@ const NoteState = (props)=>{
             },
             )
 
-            const note = {
-                "_id": "62d63dad80eff10f957dad3db4b",
-                "user": "62c7bbb4ccb7c4c37c6c0bb3",
-                "title": title,
-                "description": description,
-                "tag": tag,
-                "date": "2022-07-19T04:50:22.327Z",
-                "__v": 0
-            };
+            const note = await response.json();
             setNotes(notes.concat(note))        
       }
       //Delete a Note
