@@ -44,7 +44,8 @@ router.post(
         }
       }
       const authtoken=jwt.sign(data,JWT_SECRET);
-      res.json({authtoken});
+      success=true;
+      res.json({success,authtoken});
       //   .then(user => res.json(user)).catch(err=> {console.log(err)
       //   res.json({error: 'Please enter a unique value of email',message:err.message})});
     } catch (error) {
